@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import LoginForm from "./LoginForm";
-import SignUpForm from "./SignUpForm";
+import LoginForm from "../Components/LoginForm";
+import SignUpForm from "../Components/SignUpForm";
+import styled from "styled-components";
+import Button from "../styles";
 
 function Login({ onLogin }){
     const [showLogin, setShowLogin] = useState(true);
 
   return (
     <Wrapper>
-      <h1>PlantPlan - Denver</h1>
+      <Logo>PlantPlan - Denver</Logo>
       {showLogin ? (
         <>
           <LoginForm onLogin={onLogin} />
-          <br />
+          <Divider />
           <p>
             Don't have an account? &nbsp;
             <Button color="secondary" onClick={() => setShowLogin(false)}>
@@ -22,7 +24,7 @@ function Login({ onLogin }){
       ) : (
         <>
           <SignUpForm onLogin={onLogin} />
-          <br />
+          <Divider />
           <p>
             Already have an account? &nbsp;
             <Button color="secondary" onClick={() => setShowLogin(true)}>
@@ -35,23 +37,23 @@ function Login({ onLogin }){
   );
 }
 
-// const Logo = styled.h1`
-//   font-family: "Permanent Marker", cursive;
-//   font-size: 3rem;
-//   color: deeppink;
-//   margin: 8px 0 16px;
-// `;
+const Logo = styled.h1`
+  font-family: "Permanent Marker", cursive;
+  font-size: 3rem;
+  color: deeppink;
+  margin: 8px 0 16px;
+`;
 
-// const Wrapper = styled.section`
-//   max-width: 500px;
-//   margin: 40px auto;
-//   padding: 16px;
-// `;
+const Wrapper = styled.section`
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 16px;
+`;
 
-// const Divider = styled.hr`
-//   border: none;
-//   border-bottom: 1px solid #ccc;
-//   margin: 16px 0;
-// `;
+const Divider = styled.hr`
+  border: none;
+  border-bottom: 1px solid #ccc;
+  margin: 16px 0;
+`;
 
 export default Login;

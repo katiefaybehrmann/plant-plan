@@ -1,20 +1,27 @@
 import React, { useState } from "react";
+import { Button, Error, Input, FormField, Label } from "../styles";
 
-function LoginForm({ onLogin }) {
+function SignUpForm({ onLogin }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
   
     function handleSubmit(e) {
       e.preventDefault();
+      setErrors([]);
       setIsLoading(true);
-      fetch("/login", {
+      fetch("/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({
+          username,
+          password,
+          password_confirmation: passwordConfirmation,
+        }),
       }).then((r) => {
         setIsLoading(false);
         if (r.ok) {
@@ -42,15 +49,23 @@ function LoginForm({ onLogin }) {
           <Input
             type="password"
             id="password"
-            autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
           />
         </FormField>
         <FormField>
-          <Button variant="fill" color="primary" type="submit">
-            {isLoading ? "Loading..." : "Login"}
-          </Button>
+          <Label htmlFor="password">Password Confirmation</Label>
+          <Input
+            type="password"
+            id="password_confirmation"
+            value={passwordConfirmation}
+            onChange={(e) => setPasswordConfirmation(e.target.value)}
+            autoComplete="current-password"
+          />
+        </FormField>
+        <FormField>
+          <Button type="submit">{isLoading ? "Loading..." : "Sign Up"}</Button>
         </FormField>
         <FormField>
           {errors.map((err) => (
@@ -61,5 +76,5 @@ function LoginForm({ onLogin }) {
     );
   }
   
-  export default LoginForm;
+  export default SignUpForm;
   
