@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :plants
+  resources :plants, only: [:index, :show, :create, :update, :destroy]
+  resources :classifications, only: [:index, :show, :create]
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
   post "/login", to: "sessions#create"
