@@ -1,6 +1,9 @@
 import { Route, Routes, Link } from "react-router-dom";
 import Login from "../Pages/Login";
 import React, { useEffect, useState } from "react";
+import PlantList from "../Pages/PlantList";
+import ClassificationList from "../Pages/ClassificationList";
+import NavBar from "./NavBar";
 
 
 function App() {
@@ -19,8 +22,17 @@ function App() {
 
   return (
     <div>
-      <p>navbar</p>
-      <p>hold for other views</p>
+      <NavBar user={user} setUser={setUser} />
+      <main>
+        <Routes>
+          <Route path="/classifications">
+            <ClassificationList user={user} />
+          </Route>
+          <Route path="/">
+            <PlantList />
+          </Route>
+        </Routes>
+      </main>
     </div>
   );
 }
