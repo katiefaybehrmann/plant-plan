@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LoginForm from "../Components/LoginForm";
 import SignUpForm from "../Components/SignUpForm";
 import styled from "styled-components";
-import Button from "../styles";
+import { Button } from "../styles";
 
 function Login({ onLogin }){
     const [showLogin, setShowLogin] = useState(true);
