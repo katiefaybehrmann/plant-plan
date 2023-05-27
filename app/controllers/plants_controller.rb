@@ -34,6 +34,7 @@ class PlantsController < ApplicationController
                 render json: plant, status: :created
             else
                 render json: {errors: plant.errors.full_messages}, status: :unprocessable_entity
+            end
         else
             render_not_found_response
         end
