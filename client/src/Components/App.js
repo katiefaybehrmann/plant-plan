@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import PlantList from "../Pages/PlantList";
 import ClassificationList from "../Pages/ClassificationList";
 import NavBar from "./NavBar";
+import PlantTimeLine from "../Pages/PlantTimeLine";
 
 
 function App() {
@@ -25,12 +26,8 @@ function App() {
       <NavBar user={user} setUser={setUser} />
       <main>
         <Routes>
-          <Route path="/classifications">
-            <ClassificationList user={user} />
-          </Route>
-          <Route path="/">
-            <PlantList />
-          </Route>
+          <Route path="/classifications" element={<ClassificationList user={user} />} />
+          <Route path="/" element={<PlantList />} />
         </Routes>
       </main>
     </div>
