@@ -21,6 +21,8 @@
 # description: 'Low maintenance tender vegetable.', seed_indoor:nil, seedling_transplant:nil,
 #  seed_outdoor: "2024-05-19", user_id: 4, classification_id: 2)
 
+
+
 # Classification.create(description: 'Brassica', conditions: 'Early season plant that prefers deep sandy to loamy soil with a pH of 6.5 to 7.5')
 # Classification.create(description: 'Legume', conditions: 'Good for companion planting because of soil nitrogen fixation. Direct sew seeds in sunlight.')
 

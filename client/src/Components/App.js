@@ -9,6 +9,7 @@ import PlantTimeLine from "../Pages/PlantTimeLine";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [classifications, setClassifications] = useState([])
   //update user state for all state?
 
   useEffect(() => {
@@ -29,7 +30,7 @@ function App() {
         <p>Welcome, {user.username}</p>
         <Routes>
           <Route path="/classifications" element={<ClassificationList user={user} />} />
-          <Route path="/" element={<PlantList />} />
+          <Route path="/plants" element={<PlantList user={user}/>} />
         </Routes>
       </main>
     </div>
