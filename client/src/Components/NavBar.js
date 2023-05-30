@@ -18,6 +18,9 @@ function NavBar({ user, setUser }) {
         <Link to="/">PlantPlan</Link>
       </Logo>
       <Nav>
+        <Button as={Link} to="/plants">
+          View My Garden
+        </Button>
         <Button as={Link} to="/classifications">
           View Plant Classifications
         </Button>

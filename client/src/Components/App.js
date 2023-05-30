@@ -9,6 +9,7 @@ import PlantTimeLine from "../Pages/PlantTimeLine";
 
 function App() {
   const [user, setUser] = useState(null);
+  //update user state for all state?
 
   useEffect(() => {
     // auto-login
@@ -25,6 +26,7 @@ function App() {
     <div>
       <NavBar user={user} setUser={setUser} />
       <main>
+        <p>Welcome, {user.username}</p>
         <Routes>
           <Route path="/classifications" element={<ClassificationList user={user} />} />
           <Route path="/" element={<PlantList />} />
