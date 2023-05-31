@@ -6,17 +6,36 @@ import { Box, Button } from "../styles";
 function PlantList({ user }) {
 
     return (
-
-
         <Wrapper>
+
+            {/* {user.plants.map((plant) => (
+                <ul className="card" key={plant.id}>
+                    <Box>
+                        <li className="cards">
+                            <h2>{plant.name}</h2>
+                            <img src={plant.img_url} alt={plant.name} />
+                            <p>{plant.description}</p>
+                            <button as={Link} to={`/plants/${plant.id}`}>
+                                Update your {plant.name} plant!
+                            </button>
+                        </li>
+                    </Box>
+                </ul>))} */}
 
             {user.plants.map((plant) => (
                 <Plant key={plant.id}>
                     <Box>
                         <h2>{plant.name}</h2>
-                        <img src={plant.img_url} />
+                        <p>
+                            <em>{plant.description}</em>
+                        </p>
+                        <img className="card" src={plant.img_url} alt={plant.name} />
+                        <Button>
+                            Update this plant!
+                        </Button>
                     </Box>
-                </Plant>))}
+                </Plant>
+            ))}
             <Button as={Link} to="/new">
                 Add a plant!
             </Button>

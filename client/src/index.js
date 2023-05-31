@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './Components/App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { createGlobalStyle } from "styled-components";
+import './index.css';
+
 
 const GlobalStyle = createGlobalStyle`
   *,

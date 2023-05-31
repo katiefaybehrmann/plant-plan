@@ -27,10 +27,9 @@ function App() {
     <div>
       <NavBar user={user} setUser={setUser} />
       <main>
-        <p>Welcome, {user.username}</p>
         <Routes>
-          <Route path="/classifications" element={<ClassificationList user={user} />} />
-          <Route path="/plants" element={<PlantList user={user}/>} />
+          <Route path="/classifications" element={<ClassificationList user={user} classifications={classifications}/>} />
+          <Route path="/plants" element={<PlantList user={user} classifications={classifications}/>} />
         </Routes>
       </main>
     </div>
