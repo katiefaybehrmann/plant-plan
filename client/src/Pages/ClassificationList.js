@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button } from "../styles";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import AddClassification from "./AddClassification";
+
+function ClassificationList() {
+    const [showForm, setShowForm] = useState(false)
+    const [classifications, setClassifications] = useState([])
 
 
+    useEffect(() => {
+        fetch("/classifications")
+          .then((r) => r.json())
+          .then(setClassifications);
+      }, []);
 
-function ClassificationList({ user }){
+      const handleAddClassification = (newClassification) => {
+        setClassifications([...classifications, newClassification])
+      }
+
     return (
-        <Wrapper>
 
-            {user.classifications.map((c) => (
+        <Wrapper>
+            <h3>Select a classification and add a plant!</h3>
+            {classifications.map((c) => (
                 <Classification key={c.id}>
                     <Box>
                         <h2>{c.description}</h2>
@@ -17,14 +31,21 @@ function ClassificationList({ user }){
                             <em>{c.conditions}</em>
                         </p>
                         <Button>
-                            View plants!
+                            Add a {c.description} plant!
                         </Button>
                     </Box>
                 </Classification>
             ))}
-            <Button as={Link} to="/new">
-                Add a Classification!
-            </Button>
+            {showForm ? (
+                <AddClassification setShowForm={setShowForm} onAddClassification={handleAddClassification} />
+            ) :
+                (
+                    <div className="actions">
+                        <Button onClick={() => setShowForm((showForm) => !showForm)}>
+                            Add a Classification!
+                        </Button>
+                    </div>
+                )}
         </Wrapper>
     )
 }

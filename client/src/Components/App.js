@@ -9,7 +9,6 @@ import PlantTimeLine from "../Pages/PlantTimeLine";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [classifications, setClassifications] = useState([])
   //update user state for all state?
 
   useEffect(() => {
@@ -23,13 +22,15 @@ function App() {
 
   if (!user) return <Login onLogin={setUser} />;
 
+
+
   return (
     <div>
       <NavBar user={user} setUser={setUser} />
       <main>
         <Routes>
-          <Route path="/classifications" element={<ClassificationList user={user} classifications={classifications}/>} />
-          <Route path="/plants" element={<PlantList user={user} classifications={classifications}/>} />
+          <Route path="/classifications" element={<ClassificationList user={user}/>} />
+          <Route path="/plants" element={<PlantList user={user}/>} />
         </Routes>
       </main>
     </div>

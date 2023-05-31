@@ -29,6 +29,9 @@ function PlantList({ user }) {
                         <p>
                             <em>{plant.description}</em>
                         </p>
+                        <p>
+                            <em>Classification: {plant.classification.description}</em>
+                        </p>
                         <img className="card" src={plant.img_url} alt={plant.name} />
                         <Button>
                             Update this plant!
@@ -36,7 +39,7 @@ function PlantList({ user }) {
                     </Box>
                 </Plant>
             ))}
-            <Button as={Link} to="/new">
+            <Button as={Link} to="/classifications">
                 Add a plant!
             </Button>
         </Wrapper>

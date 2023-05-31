@@ -1,8 +1,7 @@
 class ClassificationsController < ApplicationController
 
     def index
-        current_user = User.find(session[:user_id])
-        classifications = current_user.classifications
+        classifications = Classification.all
         render json: classifications, status: :created
     end
 
@@ -17,8 +16,7 @@ class ClassificationsController < ApplicationController
     end
 
     def create
-        current_user = User.find(session[:user_id])
-        classification = current_user.classifications.create(classification_params)
+        classification = Classification.create(classification_params)
         if classification.valid?
             render json: classification, status: :created
         else
