@@ -1,26 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Box, Button } from "../styles";
+import UpdatePlant from "./UpdatePlant";
+import AddPlant from "./AddPlant";
 
-function PlantList({ user }) {
+function PlantList({ user, onUpdatePlant, classifications }) {
+    const [isEditing, setIsEditing] = useState(false)
+    const [showForm, setShowForm] = useState(false)
+
+    const handleUpdatePlant = (updatedPlant) => {
+        setIsEditing(false)
+        onUpdatePlant(updatedPlant)
+    }
 
     return (
         <Wrapper>
-
-            {/* {user.plants.map((plant) => (
-                <ul className="card" key={plant.id}>
-                    <Box>
-                        <li className="cards">
-                            <h2>{plant.name}</h2>
-                            <img src={plant.img_url} alt={plant.name} />
-                            <p>{plant.description}</p>
-                            <button as={Link} to={`/plants/${plant.id}`}>
-                                Update your {plant.name} plant!
-                            </button>
-                        </li>
-                    </Box>
-                </ul>))} */}
 
             {user.plants.map((plant) => (
                 <Plant key={plant.id}>
@@ -33,15 +28,36 @@ function PlantList({ user }) {
                             <em>Classification: {plant.classification.description}</em>
                         </p>
                         <img className="card" src={plant.img_url} alt={plant.name} />
-                        <Button>
-                            Update this plant!
-                        </Button>
+                        {isEditing ? (
+                            <UpdatePlant key={plant.id} plant={plant} onUpdatePlant={handleUpdatePlant}/>
+                        ) :
+                            (
+                                <div className="actions">
+                                    <Button onClick={() => setIsEditing((isEditing) => !isEditing)}>
+                                        <span aria-label="edit">
+                                            New plant pic!
+                                        </span>
+                                    </Button>
+                                    <Button>
+                                        <span role="img" aria-label="delete">
+                                            Time to harvest!
+                                        </span>
+                                    </Button>
+                                </div>
+                            )}
                     </Box>
                 </Plant>
             ))}
-            <Button as={Link} to="/classifications">
-                Add a plant!
-            </Button>
+            {showForm ? (
+                <AddPlant setShowForm={setShowForm} classifications={classifications}/>
+            ) :
+                (
+                    <div className="actions">
+                        <Button onClick={() => setShowForm((showForm) => !showForm)}>
+                            Add a Plant!
+                        </Button>
+                    </div>
+                )}
         </Wrapper>
     );
 }

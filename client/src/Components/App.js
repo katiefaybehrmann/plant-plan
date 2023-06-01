@@ -9,7 +9,7 @@ import PlantTimeLine from "../Pages/PlantTimeLine";
 
 function App() {
   const [user, setUser] = useState(null);
-  //update user state for all state?
+  const [classifications, setClassifications] = useState([])
 
   useEffect(() => {
     // auto-login
@@ -20,17 +20,31 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    fetch("/classifications")
+      .then((r) => r.json())
+      .then(setClassifications);
+  }, []);
+
+  const handleAddClassification = (newClassification) => {
+    setClassifications([...classifications, newClassification])
+  }
+
   if (!user) return <Login onLogin={setUser} />;
 
-
+  const handleUpdatePlant = (updatedPlantObj) => {
+    const updatedPlants = user.plants.map(p => p.id === updatedPlantObj.id ? updatedPlantObj : p)
+    const updatedUser = { ...user, plants: updatedPlants }
+    setUser(updatedUser)
+  }
 
   return (
     <div>
       <NavBar user={user} setUser={setUser} />
       <main>
         <Routes>
-          <Route path="/classifications" element={<ClassificationList user={user}/>} />
-          <Route path="/plants" element={<PlantList user={user}/>} />
+          <Route path="/classifications" element={<ClassificationList user={user} classifications={classifications} onAddClassification={handleAddClassification}/>} />
+          <Route path="/plants" element={<PlantList user={user} onUpdatePlant={handleUpdatePlant} classifications={classifications}/>} />
         </Routes>
       </main>
     </div>

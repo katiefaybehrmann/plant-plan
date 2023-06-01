@@ -29,7 +29,7 @@ class PlantsController < ApplicationController
         current_user = User.find(session[:user_id])
         plant = current_user.plants.find_by(id: params[:id])
         if plant
-            plant.update(plant_params)
+            plant.update(img_url: params[:img_url])
             if plant.valid?
                 render json: plant, status: :created
             else
@@ -57,7 +57,7 @@ class PlantsController < ApplicationController
     end
 
     def plant_params
-        params.permit(:name, :img_url, :description, :seed_indoor, :seedling_transplant, :seed_outdoor, :user_id, :classification_id)
+        params.permit(:name, :img_url, :description, :seed_indoor, :seedling_transplant, :seed_outdoor, :classification_id)
     end
 
 end

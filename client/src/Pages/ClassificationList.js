@@ -4,20 +4,20 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import AddClassification from "./AddClassification";
 
-function ClassificationList() {
+function ClassificationList({onAddClassification, classifications}) {
     const [showForm, setShowForm] = useState(false)
-    const [classifications, setClassifications] = useState([])
+    // const [classifications, setClassifications] = useState([])
 
 
-    useEffect(() => {
-        fetch("/classifications")
-          .then((r) => r.json())
-          .then(setClassifications);
-      }, []);
+    // useEffect(() => {
+    //     fetch("/classifications")
+    //       .then((r) => r.json())
+    //       .then(setClassifications);
+    //   }, []);
 
-      const handleAddClassification = (newClassification) => {
-        setClassifications([...classifications, newClassification])
-      }
+    //   const handleAddClassification = (newClassification) => {
+    //     setClassifications([...classifications, newClassification])
+    //   }
 
     return (
 
@@ -37,7 +37,7 @@ function ClassificationList() {
                 </Classification>
             ))}
             {showForm ? (
-                <AddClassification setShowForm={setShowForm} onAddClassification={handleAddClassification} />
+                <AddClassification setShowForm={setShowForm} onAddClassification={onAddClassification} />
             ) :
                 (
                     <div className="actions">
