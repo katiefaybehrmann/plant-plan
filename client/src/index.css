@@ -75,7 +75,7 @@ code {
 }
 
 .card button {
-    margin-top: 0.5rem;
+    margin: 0.5rem;
 } 
 
 @media (min-width: 768px) {

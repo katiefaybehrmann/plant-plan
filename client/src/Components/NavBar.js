@@ -43,8 +43,9 @@ const Logo = styled.h1`
   font-family: "Gill Sans";
   font-size: 3rem;
   color: darkgreen;
-  margin: 0;
+  margin: 10px;
   line-height: 1;
+  align: left;
 
   a {
     color: inherit;

@@ -5,7 +5,7 @@ import { Box, Button } from "../styles";
 import UpdatePlant from "./UpdatePlant";
 import AddPlant from "./AddPlant";
 
-function PlantList({ user, onUpdatePlant, onAddPlant, classifications }) {
+function PlantList({ user, classifications, onUpdatePlant, onAddPlant, onDeletePlant }) {
     const [isEditing, setIsEditing] = useState(false)
     const [showForm, setShowForm] = useState(false)
 
@@ -14,12 +14,19 @@ function PlantList({ user, onUpdatePlant, onAddPlant, classifications }) {
         onUpdatePlant(updatedPlant)
     }
 
+    const handleDeleteClick = (deletedPlant) => {
+        fetch(`/plants/${deletedPlant.id}`, {
+            method: "DELETE",
+        });
+
+        onDeletePlant(deletedPlant)
+    }
 
     return (
         <Wrapper>
 
             {user.plants.map((plant) => (
-                <Plant key={plant.id}>
+                <Plant key={plant.id} handleDeleteClick={handleDeleteClick}>
                     <Box>
                         <h2>{plant.name}</h2>
                         <p>
@@ -30,7 +37,7 @@ function PlantList({ user, onUpdatePlant, onAddPlant, classifications }) {
                         </p>
                         <img className="card" src={plant.img_url} alt={plant.name} />
                         {isEditing ? (
-                            <UpdatePlant key={plant.id} plant={plant} onUpdatePlant={handleUpdatePlant}/>
+                            <UpdatePlant key={plant.id} plant={plant} onUpdatePlant={handleUpdatePlant} />
                         ) :
                             (
                                 <div className="actions">
@@ -39,7 +46,7 @@ function PlantList({ user, onUpdatePlant, onAddPlant, classifications }) {
                                             New plant pic!
                                         </span>
                                     </Button>
-                                    <Button>
+                                    <Button onClick={() => handleDeleteClick(plant)}>
                                         <span role="img" aria-label="delete">
                                             Time to harvest!
                                         </span>
@@ -50,7 +57,7 @@ function PlantList({ user, onUpdatePlant, onAddPlant, classifications }) {
                 </Plant>
             ))}
             {showForm ? (
-                <AddPlant setShowForm={setShowForm} classifications={classifications} onAddPlant={onAddPlant}/>
+                <AddPlant setShowForm={setShowForm} classifications={classifications} onAddPlant={onAddPlant} />
             ) :
                 (
                     <div className="actions">

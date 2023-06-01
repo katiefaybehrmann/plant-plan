@@ -30,8 +30,6 @@ function App() {
     setClassifications([...classifications, newClassification])
   }
 
-  if (!user) return <Login onLogin={setUser} />;
-
   const handleUpdatePlant = (updatedPlantObj) => {
     const updatedPlants = user.plants.map(p => p.id === updatedPlantObj.id ? updatedPlantObj : p)
     const updatedUser = { ...user, plants: updatedPlants }
@@ -44,13 +42,21 @@ function App() {
     setUser(updatedUser)
   }
 
+  const handleDeletePlant = (deletedPlant) => {
+    const updatedPlants = user.plants.filter(p => p.id !== deletedPlant.id)
+    const updatedUser = { ...user, plants: updatedPlants }
+    setUser(updatedUser)
+  }
+
+  if (!user) return <Login onLogin={setUser} />;
+
   return (
     <div>
       <NavBar user={user} setUser={setUser} />
       <main>
         <Routes>
           <Route path="/classifications" element={<ClassificationList user={user} classifications={classifications} onAddClassification={handleAddClassification}/>} />
-          <Route path="/plants" element={<PlantList user={user} onUpdatePlant={handleUpdatePlant} classifications={classifications} onAddPlant={handleAddPlant}/>} />
+          <Route path="/plants" element={<PlantList user={user} classifications={classifications} onUpdatePlant={handleUpdatePlant} onAddPlant={handleAddPlant} onDeletePlant={handleDeletePlant}/>} />
         </Routes>
       </main>
     </div>
