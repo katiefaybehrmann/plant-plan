@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { FormField, Input, Label, Button } from "../styles";
 import styled from "styled-components";
 
-function AddPlant({ classifications, setShowForm }) {
+function AddPlant({ classifications, setShowForm, onAddPlant }) {
     const [name, setName] = useState("")
     const [image, setImage] = useState("")
     const [description, setDescription] = useState("")
-    const [seedIndoorDate, setSeedIndoorDate] = useState(null)
-    const [transplantDate, setTransplantDate] = useState(null)
-    const [seedOutdoorDate, setSeedOutdoorDate] = useState(null)
+    const [seedIndoorDate, setSeedIndoorDate] = useState("")
+    const [transplantDate, setTransplantDate] = useState("")
+    const [seedOutdoorDate, setSeedOutdoorDate] = useState("")
     const [classification, setClassification] = useState('')
 
     const handleSubmit = (e) => {
@@ -29,7 +29,7 @@ function AddPlant({ classifications, setShowForm }) {
             })
         })
             .then(r => r.json())
-            .then(p => console.log(p))
+            .then(p => onAddPlant(p))
         clearForm();
         setShowForm(false)
     }
@@ -38,9 +38,9 @@ function AddPlant({ classifications, setShowForm }) {
         setName("")
         setImage("")
         setDescription("")
-        setSeedIndoorDate(null)
-        setTransplantDate(null)
-        setSeedOutdoorDate(null)
+        setSeedIndoorDate("")
+        setTransplantDate("")
+        setSeedOutdoorDate("")
         setClassification("")
     }
 

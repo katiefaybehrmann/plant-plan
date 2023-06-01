@@ -5,7 +5,7 @@ import { Box, Button } from "../styles";
 import UpdatePlant from "./UpdatePlant";
 import AddPlant from "./AddPlant";
 
-function PlantList({ user, onUpdatePlant, classifications }) {
+function PlantList({ user, onUpdatePlant, onAddPlant, classifications }) {
     const [isEditing, setIsEditing] = useState(false)
     const [showForm, setShowForm] = useState(false)
 
@@ -13,6 +13,7 @@ function PlantList({ user, onUpdatePlant, classifications }) {
         setIsEditing(false)
         onUpdatePlant(updatedPlant)
     }
+
 
     return (
         <Wrapper>
@@ -49,7 +50,7 @@ function PlantList({ user, onUpdatePlant, classifications }) {
                 </Plant>
             ))}
             {showForm ? (
-                <AddPlant setShowForm={setShowForm} classifications={classifications}/>
+                <AddPlant setShowForm={setShowForm} classifications={classifications} onAddPlant={onAddPlant}/>
             ) :
                 (
                     <div className="actions">

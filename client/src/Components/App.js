@@ -38,13 +38,19 @@ function App() {
     setUser(updatedUser)
   }
 
+  const handleAddPlant = (newPlant) => {
+    const updatedPlants = [...user.plants, newPlant]
+    const updatedUser = { ...user, plants: updatedPlants }
+    setUser(updatedUser)
+  }
+
   return (
     <div>
       <NavBar user={user} setUser={setUser} />
       <main>
         <Routes>
           <Route path="/classifications" element={<ClassificationList user={user} classifications={classifications} onAddClassification={handleAddClassification}/>} />
-          <Route path="/plants" element={<PlantList user={user} onUpdatePlant={handleUpdatePlant} classifications={classifications}/>} />
+          <Route path="/plants" element={<PlantList user={user} onUpdatePlant={handleUpdatePlant} classifications={classifications} onAddPlant={handleAddPlant}/>} />
         </Routes>
       </main>
     </div>
