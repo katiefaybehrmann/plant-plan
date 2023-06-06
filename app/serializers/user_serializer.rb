@@ -3,3 +3,4 @@ class UserSerializer < ActiveModel::Serializer
     has_many :plants
     has_many :classifications
   end
+

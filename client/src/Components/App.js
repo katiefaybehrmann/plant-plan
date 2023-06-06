@@ -1,14 +1,14 @@
-import { Route, Routes, Link } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Login from "../Pages/Login";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import PlantList from "../Pages/PlantList";
 import ClassificationList from "../Pages/ClassificationList";
 import NavBar from "./NavBar";
 import PlantTimeLine from "../Pages/PlantTimeLine";
-
+import { UserContext } from "./Context";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const {user, setUser} = useContext(UserContext)  
   const [classifications, setClassifications] = useState([])
 
   useEffect(() => {
@@ -48,15 +48,16 @@ function App() {
     setUser(updatedUser)
   }
 
-  if (!user) return <Login onLogin={setUser} />;
+  if (!user) return <Login />;
 
   return (
     <div>
-      <NavBar user={user} setUser={setUser} />
+      <NavBar />
       <main>
         <Routes>
-          <Route path="/classifications" element={<ClassificationList user={user} classifications={classifications} onAddClassification={handleAddClassification}/>} />
-          <Route path="/plants" element={<PlantList user={user} classifications={classifications} onUpdatePlant={handleUpdatePlant} onAddPlant={handleAddPlant} onDeletePlant={handleDeletePlant}/>} />
+          <Route path="/classifications" element={<ClassificationList classifications={classifications} onAddClassification={handleAddClassification}/>} />
+          <Route path="/plants" element={<PlantList classifications={classifications} onUpdatePlant={handleUpdatePlant} onAddPlant={handleAddPlant} onDeletePlant={handleDeletePlant}/>} />
+          <Route path="/plants/dates" element={<PlantTimeLine />}/>
         </Routes>
       </main>
     </div>

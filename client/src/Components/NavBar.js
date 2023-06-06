@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../styles";
+import { UserContext } from "./Context";
 
-function NavBar({ user, setUser }) {
+function NavBar() {
+  const {user, setUser} = useContext(UserContext)
+  
   function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
@@ -20,6 +23,9 @@ function NavBar({ user, setUser }) {
       <Nav>
         <Button as={Link} to="/plants">
           View My Garden
+        </Button>
+        <Button as={Link} to="/plants/dates">
+          My Planting Timeline
         </Button>
         <Button as={Link} to="/classifications">
           View Plant Classifications
@@ -45,7 +51,6 @@ const Logo = styled.h1`
   color: darkgreen;
   margin: 10px;
   line-height: 1;
-  align: left;
 
   a {
     color: inherit;
@@ -56,7 +61,7 @@ const Logo = styled.h1`
 const Nav = styled.nav`
   display: flex;
   gap: 4px;
-  position: absolute;
+  position: relative;
   right: 8px;
 `;
 

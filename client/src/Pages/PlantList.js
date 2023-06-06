@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Box, Button } from "../styles";
 import UpdatePlant from "./UpdatePlant";
 import AddPlant from "./AddPlant";
+import { UserContext } from "../Components/Context";
 
-function PlantList({ user, classifications, onUpdatePlant, onAddPlant, onDeletePlant }) {
+function PlantList({ classifications, onUpdatePlant, onAddPlant, onDeletePlant }) {
+    const {user} = useContext(UserContext); 
     const [isEditing, setIsEditing] = useState(false)
     const [showForm, setShowForm] = useState(false)
 
