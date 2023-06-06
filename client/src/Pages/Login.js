@@ -4,8 +4,8 @@ import SignUpForm from "../Components/SignUpForm";
 import styled from "styled-components";
 import { Button } from "../styles";
 
-function Login(){
-    const [showLogin, setShowLogin] = useState(true);
+function Login() {
+  const [showLogin, setShowLogin] = useState(true);
 
   return (
     <Wrapper>
@@ -38,9 +38,9 @@ function Login(){
 }
 
 const Logo = styled.h1`
-  font-family: "Permanent Marker", cursive;
-  font-size: 3rem;
-  color: deeppink;
+font-family: "Gill Sans";
+font-size: 3rem;
+color: darkgreen;
   margin: 8px 0 16px;
 `;
 

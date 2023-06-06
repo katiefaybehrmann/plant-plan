@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button } from "../styles";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import AddClassification from "./AddClassification";
 
@@ -30,9 +29,6 @@ function ClassificationList({onAddClassification, classifications}) {
                         <p>
                             <em>{c.conditions}</em>
                         </p>
-                        <Button>
-                            Add a {c.description} plant!
-                        </Button>
                     </Box>
                 </Classification>
             ))}
