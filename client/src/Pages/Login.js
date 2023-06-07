@@ -4,7 +4,7 @@ import SignUpForm from "../Components/SignUpForm";
 import styled from "styled-components";
 import { Button } from "../styles";
 
-function Login() {
+function Login( {loggingIn, setLoggingIn, signingUp, setSigningUp}) {
   const [showLogin, setShowLogin] = useState(true);
 
   return (
@@ -12,7 +12,7 @@ function Login() {
       <Logo>PlantPlan - Denver</Logo>
       {showLogin ? (
         <>
-          <LoginForm />
+          <LoginForm  loggingIn={loggingIn} setLoggingIn={setLoggingIn}/>
           <Divider />
           <p>
             Don't have an account? &nbsp;
@@ -23,7 +23,7 @@ function Login() {
         </>
       ) : (
         <>
-          <SignUpForm />
+          <SignUpForm signingUp={signingUp} setSigningUp={setSigningUp}/>
           <Divider />
           <p>
             Already have an account? &nbsp;

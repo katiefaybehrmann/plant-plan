@@ -1,8 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Button, Error, Input, FormField, Label } from "../styles";
 import { UserContext } from "./Context";
 
-function LoginForm() {
+function LoginForm({loggingIn, setLoggingIn}) {
   const { user, setUser } = useContext(UserContext);
 
   const [username, setUsername] = useState("");
@@ -22,7 +22,10 @@ function LoginForm() {
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
-        r.json().then((user) => setUser(user));
+        r.json().then((user) => {
+          setUser(user)
+          return setLoggingIn(true)
+        });
       } else {
         r.json().then((err) => setErrors(err.errors));
       }

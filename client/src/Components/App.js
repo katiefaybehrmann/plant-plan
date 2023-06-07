@@ -11,6 +11,8 @@ import Home from "../Pages/Home"
 function App() {
   const { user, setUser } = useContext(UserContext)
   const [classifications, setClassifications] = useState([])
+  const [loggingIn, setLoggingIn] = useState(false)
+  const [signingUp, setSigningUp] = useState(false)
 
   useEffect(() => {
     // auto-login
@@ -19,13 +21,13 @@ function App() {
         r.json().then((user) => setUser(user));
       }
     });
-  }, []);
+  }, [loggingIn, signingUp]);
 
   useEffect(() => {
     fetch("/classifications")
       .then((r) => r.json())
       .then(setClassifications);
-  }, []);
+  }, [loggingIn, signingUp]);
 
   const handleAddClassification = (newClassification) => {
     setClassifications([...classifications, newClassification])
@@ -49,7 +51,7 @@ function App() {
     setUser(updatedUser)
   }
 
-  if (!user) return <Login />;
+  if (!user) return <Login loggingIn={loggingIn} setLoggingIn={setLoggingIn} signingUp={signingUp} setSigningUp={setSigningUp}/>;
 
   return (
     <div>

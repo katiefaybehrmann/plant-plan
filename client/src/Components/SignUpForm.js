@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Button, Error, Input, FormField, Label } from "../styles";
 import { UserContext } from "./Context";
 
-function SignUpForm() {
+function SignUpForm({signingUp, setSigningUp}) {
   const {user, setUser} = useContext(UserContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +27,9 @@ function SignUpForm() {
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
-        r.json().then((user) => setUser(user));
+        r.json().then((user) => {
+          setUser(user)
+          return setSigningUp(true)});
       } else {
         r.json().then((err) => setErrors(err.errors));
       }

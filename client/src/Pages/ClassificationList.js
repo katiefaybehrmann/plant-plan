@@ -9,7 +9,7 @@ function ClassificationList({onAddClassification, classifications}) {
     return (
 
         <Wrapper>
-            <h3>Select a classification and add a plant!</h3>
+            <h3>View information about classifications!</h3>
             {classifications.map((c) => (
                 <Classification key={c.id}>
                     <Box>
