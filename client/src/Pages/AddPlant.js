@@ -29,7 +29,9 @@ function AddPlant({ classifications, setShowForm, onAddPlant }) {
             })
         })
             .then(r => r.json())
-            .then(p => onAddPlant(p))
+            .then((p) => {
+                console.log(p)
+                onAddPlant(p)})
         clearForm();
         setShowForm(false)
     }

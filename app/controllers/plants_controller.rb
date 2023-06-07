@@ -1,7 +1,7 @@
 class PlantsController < ApplicationController
     def index
         current_user = User.find(session[:user_id])
-        plants = current_user.plants
+        plants = current_user.plants 
         render json: plants, status: :created
     end
 
