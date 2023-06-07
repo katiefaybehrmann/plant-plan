@@ -4,7 +4,7 @@ import SignUpForm from "../Components/SignUpForm";
 import styled from "styled-components";
 import { Button } from "../styles";
 
-function Login( {loggingIn, setLoggingIn, signingUp, setSigningUp}) {
+function Login( {loggingIn, setLoggingIn}) {
   const [showLogin, setShowLogin] = useState(true);
 
   return (
@@ -23,7 +23,7 @@ function Login( {loggingIn, setLoggingIn, signingUp, setSigningUp}) {
         </>
       ) : (
         <>
-          <SignUpForm signingUp={signingUp} setSigningUp={setSigningUp}/>
+          <SignUpForm loggingIn={loggingIn} setLoggingIn={setLoggingIn}/>
           <Divider />
           <p>
             Already have an account? &nbsp;

@@ -1,9 +1,11 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Error, Input, FormField, Label } from "../styles";
 import { UserContext } from "./Context";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm({loggingIn, setLoggingIn}) {
   const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,8 +25,9 @@ function LoginForm({loggingIn, setLoggingIn}) {
       setIsLoading(false);
       if (r.ok) {
         r.json().then((user) => {
+          navigate("/")
           setUser(user)
-          return setLoggingIn(true)
+          return setLoggingIn(loggingIn => !loggingIn)
         });
       } else {
         r.json().then((err) => setErrors(err.errors));

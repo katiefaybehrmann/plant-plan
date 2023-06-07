@@ -1,9 +1,12 @@
 import React, { useState, useContext } from "react";
 import { Button, Error, Input, FormField, Label } from "../styles";
 import { UserContext } from "./Context";
+import { useNavigate } from "react-router-dom";
 
-function SignUpForm({signingUp, setSigningUp}) {
+function SignUpForm({loggingIn, setLoggingIn}) {
   const {user, setUser} = useContext(UserContext);
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -28,8 +31,9 @@ function SignUpForm({signingUp, setSigningUp}) {
       setIsLoading(false);
       if (r.ok) {
         r.json().then((user) => {
+          navigate("/")
           setUser(user)
-          return setSigningUp(true)});
+          return setLoggingIn(loggingIn => !loggingIn)});
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
