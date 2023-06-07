@@ -6,9 +6,10 @@ import ClassificationList from "../Pages/ClassificationList";
 import NavBar from "./NavBar";
 import PlantTimeLine from "../Pages/PlantTimeLine";
 import { UserContext } from "./Context";
+import Home from "../Pages/Home"
 
 function App() {
-  const {user, setUser} = useContext(UserContext)  
+  const { user, setUser } = useContext(UserContext)
   const [classifications, setClassifications] = useState([])
 
   useEffect(() => {
@@ -55,9 +56,10 @@ function App() {
       <NavBar />
       <main>
         <Routes>
-          <Route path="/classifications" element={<ClassificationList classifications={classifications} onAddClassification={handleAddClassification}/>} />
-          <Route path="/plants" element={<PlantList classifications={classifications} onUpdatePlant={handleUpdatePlant} onAddPlant={handleAddPlant} onDeletePlant={handleDeletePlant}/>} />
-          <Route path="/plants/dates" element={<PlantTimeLine />}/>
+          <Route path="/" element={<Home />} />
+          <Route path="/classifications" element={<ClassificationList classifications={classifications} onAddClassification={handleAddClassification} />} />
+          <Route path="/plants" element={<PlantList classifications={classifications} onUpdatePlant={handleUpdatePlant} onAddPlant={handleAddPlant} onDeletePlant={handleDeletePlant} />} />
+          <Route path="/plants/dates" element={<PlantTimeLine />} />
         </Routes>
       </main>
     </div>

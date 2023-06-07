@@ -1,22 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Box, Button } from "../styles";
 import styled from "styled-components";
 import AddClassification from "./AddClassification";
 
 function ClassificationList({onAddClassification, classifications}) {
     const [showForm, setShowForm] = useState(false)
-    // const [classifications, setClassifications] = useState([])
-
-
-    // useEffect(() => {
-    //     fetch("/classifications")
-    //       .then((r) => r.json())
-    //       .then(setClassifications);
-    //   }, []);
-
-    //   const handleAddClassification = (newClassification) => {
-    //     setClassifications([...classifications, newClassification])
-    //   }
 
     return (
 
