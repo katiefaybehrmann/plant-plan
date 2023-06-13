@@ -17,6 +17,12 @@ function ClassificationList({onAddClassification, classifications}) {
                         <p>
                             <em>{c.conditions}</em>
                         </p>
+                        <h4>Who else in your network is planting {c.description}s?</h4>
+                        <ul>
+                        {c.users.map(u => 
+                            <li key={u.id}>{u.username}</li>
+                        )}
+                        </ul>
                     </Box>
                 </Classification>
             ))}

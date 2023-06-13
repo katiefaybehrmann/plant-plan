@@ -129,7 +129,6 @@ function AddPlant({ classifications, setShowForm, onAddPlant }) {
                         </Button>
                     </FormField>
                     <FormField>
-                        {errors}
                         {errors.map((err) => (
                                 <Error key={err}>{err}</Error>
                             ))
