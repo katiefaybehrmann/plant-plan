@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormField, Input, Label, Button } from "../styles";
+import { FormField, Input, Label, Button, Error } from "../styles";
 import styled from "styled-components";
 
 function AddPlant({ classifications, setShowForm, onAddPlant }) {
@@ -10,6 +10,8 @@ function AddPlant({ classifications, setShowForm, onAddPlant }) {
     const [transplantDate, setTransplantDate] = useState("")
     const [seedOutdoorDate, setSeedOutdoorDate] = useState("")
     const [classification, setClassification] = useState('')
+    const [errors, setErrors] = useState([]);
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -28,12 +30,22 @@ function AddPlant({ classifications, setShowForm, onAddPlant }) {
                 "classification_id": classification
             })
         })
-            .then(r => r.json())
-            .then((p) => {
-                console.log(p)
-                onAddPlant(p)})
-        clearForm();
-        setShowForm(false)
+            .then((r) => {
+                if (r.ok) {
+                    r.json()
+                        .then((p) => {
+                            console.log(p)
+                            onAddPlant(p)
+                            clearForm();
+                            setShowForm(false)
+                        })
+
+                }
+                else {
+                    r.json().then((err) => setErrors(err.errors));
+                }
+            })
+
     }
 
     const clearForm = () => {
@@ -115,6 +127,13 @@ function AddPlant({ classifications, setShowForm, onAddPlant }) {
                         <Button type="submit">
                             Submit Plant
                         </Button>
+                    </FormField>
+                    <FormField>
+                        {errors}
+                        {errors.map((err) => (
+                                <Error key={err}>{err}</Error>
+                            ))
+                        }
                     </FormField>
                 </form>
             </WrapperChild>

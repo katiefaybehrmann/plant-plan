@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-    attributes :id, :username
+    attributes :username
     has_many :plants
     has_many :classifications
   end
