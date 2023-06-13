@@ -44,7 +44,7 @@ function App() {
     const updatedUser = { ...user, plants: updatedPlants }
 
     const currentClassification = classifications.find(c => c.id == newPlant.classification_id)
-    const updatedUserList = currentClassification.users.map(u => u.id == user.id ? u : user)
+    const updatedUserList = currentClassification.users.map(u => u.id == user.id ? user : u)
     const updatedClassification = { ...currentClassification, users: updatedUserList }
     const updatedClassifications = classifications.map(c => c.id == currentClassification.id ? updatedClassification : c)
 
