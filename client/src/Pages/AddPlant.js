@@ -44,7 +44,9 @@ function AddPlant({ classifications, setShowForm, onAddPlant }) {
                 else {
                     r.json().then((err) => setErrors(err.errors));
                 }
+
             })
+
 
     }
 
@@ -119,7 +121,9 @@ function AddPlant({ classifications, setShowForm, onAddPlant }) {
                     </FormField>
                     <FormField>
                         <Label htmlFor="classification">Classification</Label>
-                        <select name="classification" id="classification" onChange={(e) => setClassification(e.target.value)}>
+                        <select name="classification" id="classification" onChange={(e) => {
+                            console.log(e.target.value)
+                            setClassification(e.target.value)}}>
                             {classifications.map(c => <option value={c.id}>{c.description}</option>)}
                         </select>
                     </FormField>
@@ -130,8 +134,8 @@ function AddPlant({ classifications, setShowForm, onAddPlant }) {
                     </FormField>
                     <FormField>
                         {errors.map((err) => (
-                                <Error key={err}>{err}</Error>
-                            ))
+                            <Error key={err}>{err}</Error>
+                        ))
                         }
                     </FormField>
                 </form>

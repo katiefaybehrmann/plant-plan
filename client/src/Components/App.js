@@ -42,7 +42,15 @@ function App() {
   const handleAddPlant = (newPlant) => {
     const updatedPlants = [...user.plants, newPlant]
     const updatedUser = { ...user, plants: updatedPlants }
+
+    const currentClassification = classifications.find(c => c.id == newPlant.classification_id)
+    const updatedUserList = currentClassification.users.map(u => u.id == user.id ? u : user)
+    const updatedClassification = { ...currentClassification, users: updatedUserList }
+    const updatedClassifications = classifications.map(c => c.id == currentClassification.id ? updatedClassification : c)
+
     setUser(updatedUser)
+    setClassifications(updatedClassifications)
+
   }
 
   const handleDeletePlant = (deletedPlant) => {
@@ -51,7 +59,7 @@ function App() {
     setUser(updatedUser)
   }
 
-  if (!user) return <Login loggingIn={loggingIn} setLoggingIn={setLoggingIn}/>;
+  if (!user) return <Login loggingIn={loggingIn} setLoggingIn={setLoggingIn} />;
 
   return (
     <div>

@@ -1,5 +1,4 @@
 class ClassificationsController < ApplicationController
-    skip_before_action :authorized, only: [:index]
 
     def index
         classifications = Classification.all
