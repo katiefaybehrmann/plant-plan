@@ -1,5 +1,8 @@
 class ClassificationSerializer < ActiveModel::Serializer
-    attributes :id, :description, :conditions
-    has_many :users
+    attributes :id, :description, :conditions, :unique_users
     has_many :plants
+
+    def unique_users
+      object.users.uniq
+    end
   end

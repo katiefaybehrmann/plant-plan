@@ -43,13 +43,13 @@ function App() {
     const updatedPlants = [...user.plants, newPlant]
     const updatedUser = { ...user, plants: updatedPlants }
 
-    const currentClassification = classifications.find(c => c.id == newPlant.classification_id)
-    const updatedUserList = currentClassification.users.map(u => u.id == user.id ? user : u)
-    const updatedClassification = { ...currentClassification, users: updatedUserList }
-    const updatedClassifications = classifications.map(c => c.id == currentClassification.id ? updatedClassification : c)
+    // const currentClassification = classifications.find(c => c.id == newPlant.classification_id)
+    // const updatedUserList = currentClassification.users.map(u => u.id == user.id ? user : u)
+    // const updatedClassification = { ...currentClassification, users: updatedUserList }
+    // const updatedClassifications = classifications.map(c => c.id == currentClassification.id ? updatedClassification : c)
 
     setUser(updatedUser)
-    setClassifications(updatedClassifications)
+    //setClassifications(updatedClassifications)
 
   }
 
