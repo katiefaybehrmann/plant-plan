@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :authorized, only: [:create, :top_users]
+    skip_before_action :authorized, only: [:create]
 
     def create
         user = User.create(user_params)
@@ -15,15 +15,15 @@ class UsersController < ApplicationController
         render json: current_user, include: ['plants', 'plants.classification']
     end
 
-    def top_users
-        users = User.top_users (params[:n])
-        if users.length > 0
-            render json: users, status: :created
-        else
-            render json: { errors: "No users with more than #{params[:n]} plants"}, status: :not_found
-        end
+    # def top_users
+    #     users = User.top_users (params[:n])
+    #     if users.length > 0
+    #         render json: users, status: :created
+    #     else
+    #         render json: { errors: "No users with more than #{params[:n]} plants"}, status: :not_found
+    #     end
 
-    end
+    # end
 
     private
     def user_params

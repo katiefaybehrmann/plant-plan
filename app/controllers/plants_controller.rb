@@ -56,4 +56,8 @@ class PlantsController < ApplicationController
         params.permit(:name, :img_url, :description, :seed_indoor, :seedling_transplant, :seed_outdoor, :classification_id)
     end
 
+    def current_user
+        current_user = User.find(session[:user_id])
+    end
+
 end
