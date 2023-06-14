@@ -1,5 +1,4 @@
 class PlantsController < ApplicationController
-    # skip_before_action :authorized, only: [:search]
 
     def index
         plants = current_user.plants 
@@ -48,21 +47,6 @@ class PlantsController < ApplicationController
         end
     end
 
-    # def search
-    #     plants = Plant.all
-    #     classifications = []
-    #     plants.each do |p|
-    #         if p.description.include?("tender")
-    #             classifications.push(p.classification)
-    #         end
-    #     end
-    #     if classifications.length > 0
-    #         render json: classifications, status: :created
-    #     else
-    #         render json: { error: "No search matched" }, status: :not_found
-    #     end
-    # end
-
     private
     def render_not_found_response
         render json: { error: "Plant not found" }, status: :not_found
@@ -70,10 +54,6 @@ class PlantsController < ApplicationController
 
     def plant_params
         params.permit(:name, :img_url, :description, :seed_indoor, :seedling_transplant, :seed_outdoor, :classification_id)
-    end
-
-    def current_user
-        current_user = User.find(session[:user_id])
     end
 
 end

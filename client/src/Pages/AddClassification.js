@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { FormField, Input, Label, Button } from "../styles";
+import { FormField, Input, Label, Button, Error } from "../styles";
 import styled from "styled-components";
 
 
 function AddClassification({ setShowForm, onAddClassification }) {
     const [description, setDescription] = useState("")
     const [conditions, setConditions] = useState("")
+    const [errors, setErrors] = useState([]);
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -19,11 +20,22 @@ function AddClassification({ setShowForm, onAddClassification }) {
                 "conditions": conditions
             })
         })
-            .then(r => r.json())
-            .then(c => onAddClassification(c))
-        clearForm();
-        setShowForm(false)
+            .then((r) => {
+                if (r.ok) {
+                    r.json()
+                        .then((c) => {
+                            onAddClassification(c)
+                            clearForm();
+                            setShowForm(false)
+                        })
+                }
+                else {
+                    r.json().then((err) => setErrors(err.errors))
+                }
+            })
+
     }
+
 
     const clearForm = () => {
         setDescription("")
@@ -57,6 +69,12 @@ function AddClassification({ setShowForm, onAddClassification }) {
                         <Button type="submit">
                             Submit Classification
                         </Button>
+                    </FormField>
+                    <FormField>
+                        {errors.map((err) => (
+                            <Error key={err}>{err}</Error>
+                        ))
+                        }
                     </FormField>
                 </form>
             </WrapperChild>
