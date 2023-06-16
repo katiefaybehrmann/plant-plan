@@ -18,13 +18,13 @@ function PlantTimeLine() {
         const plantObjs = []
 
         user.plants.forEach((p) => {
-            if (p.seed_indoor == d) {
+            if (p.seed_indoor === d) {
                 plantObjs.push(" " + p.name + ": Seed Indoors")
             }
-            else if (p.seedling_transplant == d) {
+            else if (p.seedling_transplant === d) {
                 plantObjs.push(" " + p.name + ": Transplant Outside")
             }
-            else if (p.seed_outdoor == d) {
+            else if (p.seed_outdoor === d) {
                 plantObjs.push(" " + p.name + ": Seed Outdoors")
             }
         })
