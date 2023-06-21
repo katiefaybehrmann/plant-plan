@@ -17,7 +17,7 @@ function ClassificationList({onAddClassification, classifications}) {
                         <p>
                             <em>{c.conditions}</em>
                         </p>
-                        <h4>Who else in your network is planting {c.description}s?</h4>
+                        <h4>Who else in your network is planting {c.description}?</h4>
                         <ul>
                         {c.unique_users.map(u => 
                             <li key={u.id}>{u.username}</li>

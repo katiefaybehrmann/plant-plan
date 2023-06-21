@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  resources :plants
-  resources :classifications, only: [:index, :show, :create]
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
+  resources :plants
+  resources :classifications, only: [:index, :show, :create]
+
 
   # get "/top_users/:n", to: "users#top_users"
   

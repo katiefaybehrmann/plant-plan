@@ -44,18 +44,31 @@ function App() {
     const updatedUser = { ...user, plants: updatedPlants }
 
     const currentClassification = classifications.find(c => c.id === newPlant.classification_id)
-    const updatedCUsers = [...currentClassification.unique_users, newPlant.user]
-    const updatedC = {...currentClassification, unique_users: updatedCUsers}
-    const updatedClassifications = classifications.map(c => c.id === currentClassification.id ? updatedC : c)
+    const hasUser = currentClassification.unique_users.find(u => u.id === user.id)
+    if (!hasUser) {
+      const updatedCUsers = [...currentClassification.unique_users, newPlant.user]
+      const updatedC = { ...currentClassification, unique_users: updatedCUsers }
+      const updatedClassifications = classifications.map(c => c.id === currentClassification.id ? updatedC : c)
+      setClassifications(updatedClassifications)
+    }
 
     setUser(updatedUser)
-    setClassifications(updatedClassifications)
 
   }
 
   const handleDeletePlant = (deletedPlant) => {
     const updatedPlants = user.plants.filter(p => p.id !== deletedPlant.id)
     const updatedUser = { ...user, plants: updatedPlants }
+
+    const currentClassification = classifications.find(c => c.id === deletedPlant.classification_id)
+    const userClassifications = user.plants.filter(p => p.classification_id === currentClassification.id)
+    console.log(userClassifications)
+    if (userClassifications.length < 2) {
+      const updatedUsers = currentClassification.unique_users.filter(u => u.id !== user.id)
+      const updatedClassification = { ...currentClassification, unique_users: updatedUsers }
+      const updatedClassifications = classifications.map(c => c.id == currentClassification.id ? updatedClassification : c)
+      setClassifications(updatedClassifications)
+    }
     setUser(updatedUser)
   }
 

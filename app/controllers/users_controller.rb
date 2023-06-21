@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     end
 
     def show
+        current_user = User.find(session[:user_id])
         render json: current_user, include: ['plants', 'plants.classification']
     end
 
@@ -28,9 +29,5 @@ class UsersController < ApplicationController
     private
     def user_params
         params.permit(:username, :password, :password_confirmation)
-    end
-
-    def current_user
-        current_user = User.find(session[:user_id])
     end
 end
